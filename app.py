@@ -170,42 +170,48 @@ USER_CREDENTIALS = {
 
 def user_videos_tab():
     st.header("Downloadable Videos")
-    plant_care_id = "1UsXqwI9wzIxSFQ7RZIZpo9jh5Ssf_V2L"
-    plant_care = download_video_from_drive(plant_care_id, "videos/plant_care.mp4")
-    harvesting_id = "1z9bRAD9iROQmAN5mrll3nejuSPyhh0MM"  # replace with your ID
-    harvesting = download_video_from_drive(harvesting_id, "videos/harvesting.mp4")
-    pest_id = "1tHVdPmQeKR1XIyZypUjUnNLF1c_iDJa3"  # replace with your ID
-    pest = download_video_from_drive(pest_id, "videos/pest.mp4")
-
 
     videos = {
-        "Intro to Plant Care": plant_care,
-        "Harvesting Tips": harvesting,
-        "Pest Identification": pest
+        "Intro to Plant Care": {
+            "file_id": "1UsXqwI9wzIxSFQ7RZIZpo9jh5Ssf_V2L",
+            "path": "videos/plant_care.mp4"
+        },
+        "Harvesting Tips": {
+            "file_id": "1z9bRAD9iROQmAN5mrll3nejuSPyhh0MM",
+            "path": "videos/harvesting.mp4"
+        },
+        "Pest Identification": {
+            "file_id": "1tHVdPmQeKR1XIyZypUjUnNLF1c_iDJa3",
+            "path": "videos/pest.mp4"
+        }
     }
 
-    # Initialize watched videos list for user if not exists
     if "watched_videos" not in st.session_state:
         st.session_state["watched_videos"] = set()
 
-    for title, path in videos.items():
+    for title, info in videos.items():
+        video_path = download_video_from_drive(info["file_id"], info["path"])
+
+        if video_path is None:
+            st.error(f"Could not load video '{title}'.")
+            continue
+
         st.subheader(title)
         try:
-            with open(path, "rb") as video_file:
+            with open(video_path, "rb") as video_file:
                 video_bytes = video_file.read()
                 st.video(video_bytes)
                 st.download_button(
                     label=f"Download '{title}'",
                     data=video_bytes,
-                    file_name=path.split("/")[-1],
+                    file_name=os.path.basename(video_path),
                     mime="video/mp4"
                 )
-                # Button to mark as watched
                 if st.button(f"Mark '{title}' as watched", key=f"watch_{title}"):
                     st.session_state["watched_videos"].add(title)
                     st.success(f"Marked '{title}' as watched")
         except FileNotFoundError:
-            st.error(f"Video file not found: {path}")
+            st.error(f"Video file not found: {video_path}")
         st.markdown("---")
 
 
