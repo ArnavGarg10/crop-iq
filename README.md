@@ -1,4 +1,4 @@
-# crop-iq
+# CropIQ
 
 # How to run the program locally
 
