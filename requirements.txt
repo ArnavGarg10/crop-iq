@@ -3,6 +3,5 @@ numpy
 Pillow
 Requests
 streamlit
-streamlit_extras
 tensorflow
 ultralytics
