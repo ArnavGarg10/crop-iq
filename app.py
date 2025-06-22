@@ -51,8 +51,11 @@ def predict_image(img_path, model, class_names, target_size=(256, 256)):
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array = img_array / 255.0
+    # Add batch dimension
+    img_batch = np.expand_dims(img_array, axis=0)  # shape becomes (1, 256, 256, 3)
 
-    preds = model.predict(img_array)
+
+    preds = model.predict(img_batch)
     pred_index = np.argmax(preds, axis=1)[0]
     pred_class = class_names[pred_index]
     confidence = preds[0][pred_index]
