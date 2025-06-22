@@ -12,6 +12,16 @@ import os
 from ultralytics import YOLO
 from PIL import Image
 import streamlit_extras
+import os
+import gdown
+import streamlit as st
+
+@st.cache_data(show_spinner=False)
+def download_video_from_drive(file_id: str, dest_path: str):
+    if not os.path.exists(dest_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, dest_path, quiet=False)
+    return dest_path
 
 
 hide_default_format = """
@@ -162,10 +172,18 @@ USER_CREDENTIALS = {
 
 def user_videos_tab():
     st.header("Downloadable Videos")
+    plant_care_id = "1LIbkKOW4HB2xUpTWizg9nzcYtX2A5NWe"
+    plant_care = download_video_from_drive(plant_care_id, "videos/plant_care.mp4")
+    harvesting_id = "1mNtiOfhIa81PeJslHbYbHt76Tx9j4Z-D"  # replace with your ID
+    harvesting = download_video_from_drive(harvesting_id, "videos/harvesting.mp4")
+    pest_id = "19pxHer0gmSzlaUwrC7V58b-wQRiKA3pb"  # replace with your ID
+    pest = download_video_from_drive(pest_id, "videos/pest.mp4")
+
+
     videos = {
-        "Intro to Plant Care": "videos/farming1.mp4",
-        "Harvesting Tips": "videos/farming2.mp4",
-        "Pest Identification": "videos/farming3.mp4"
+        "Intro to Plant Care": plant_care,
+        "Harvesting Tips": harvesting,
+        "Pest Identification": pest
     }
 
     # Initialize watched videos list for user if not exists
