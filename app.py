@@ -17,8 +17,17 @@ import gdown
 @st.cache_data(show_spinner=False)
 def download_video_from_drive(file_id: str, dest_path: str):
     if not os.path.exists(dest_path):
-        url = f"https://drive.google.com/uc?export=download&id={file_id}"
-        gdown.download(url, dest_path, quiet=False, fuzzy=True, use_cookies=False)
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+        url = f"https://drive.google.com/uc?id={file_id}"
+        st.info(f"Downloading video to {dest_path}...")
+        try:
+            gdown.download(url, dest_path, quiet=False)
+            st.success(f"Downloaded video: {os.path.basename(dest_path)}")
+        except Exception as e:
+            st.error(f"Failed to download video from Drive: {e}")
+            return None
     return dest_path
 
 
