@@ -2,6 +2,6 @@
 
 # How to run the program locally
 
-Download the files and unzip them
-Run **pip install -r requirements.txt**
-Run **streamlit run app.py**
+1. Download the files and unzip them
+2. Run **pip install -r requirements.txt**
+3. Run **streamlit run app.py**
