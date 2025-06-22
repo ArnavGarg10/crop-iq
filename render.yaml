@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: streamlit-app
+    name: cropiq
     env: python
     plan: free
     buildCommand: ""
