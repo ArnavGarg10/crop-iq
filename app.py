@@ -452,7 +452,7 @@ def admin_dashboard_tab():
                     with st.spinner("Analyzing..."):
                         predicted_class, confidence, health_status = predict_image(img_path, model, class_names)
                 except Exception as e:
-                    st.error("Something went wrong. Please reload the app and try again.")
+                    st.error("Something went wrong. Please wait and try again.")
                     st.button("🔄 Reload", on_click=rerun())
 
 
