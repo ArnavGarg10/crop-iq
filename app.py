@@ -11,7 +11,6 @@ import tempfile
 import os
 from ultralytics import YOLO
 from PIL import Image
-import streamlit_extras
 import os
 import gdown
 import streamlit as st
