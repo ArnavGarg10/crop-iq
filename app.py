@@ -448,8 +448,13 @@ def admin_dashboard_tab():
             run_analysis = st.button("🔍 Run Analysis")
 
             if run_analysis:
-                with st.spinner("Analyzing..."):
-                    predicted_class, confidence, health_status = predict_image(img_path, model, class_names)
+                try:
+                    with st.spinner("Analyzing..."):
+                        predicted_class, confidence, health_status = predict_image(img_path, model, class_names)
+                except Exception as e:
+                    st.error("Something went wrong. Please reload the app and try again.")
+                    st.button("🔄 Reload", on_click=rerun())
+
 
                 st.success("✅ Analysis Complete!")
                 st.markdown(f"""
