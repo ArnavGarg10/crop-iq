@@ -1,4 +1,3 @@
-cv2
 gdown
 numpy
 Pillow
@@ -6,4 +5,3 @@ Requests
 streamlit
 tensorflow
 ultralytics
-libgl1
