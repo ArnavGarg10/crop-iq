@@ -18,7 +18,7 @@ import gdown
 def download_video_from_drive(file_id: str, dest_path: str):
     if not os.path.exists(dest_path):
         url = f"https://drive.google.com/uc?export=download&id={file_id}"
-        gdown.download(url, dest_path, quiet=False, fuzzy=True)
+        gdown.download(url, dest_path, quiet=False, fuzzy=True, use_cookies=False)
     return dest_path
 
 
