@@ -11,10 +11,8 @@ import tempfile
 import os
 from ultralytics import YOLO
 from PIL import Image
-import streamlit_extras
 import os
 import gdown
-import streamlit as st
 
 @st.cache_data(show_spinner=False)
 def download_video_from_drive(file_id: str, dest_path: str):
