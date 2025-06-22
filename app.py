@@ -172,11 +172,11 @@ USER_CREDENTIALS = {
 def user_videos_tab():
     st.header("Downloadable Videos")
     plant_care_id = "1LIbkKOW4HB2xUpTWizg9nzcYtX2A5NWe"
-    plant_care = download_video_from_drive(plant_care_id, "videos/plant_care.mp4")
+    plant_care = download_video_from_drive(plant_care_id, "plant_care.mp4")
     harvesting_id = "1mNtiOfhIa81PeJslHbYbHt76Tx9j4Z-D"  # replace with your ID
-    harvesting = download_video_from_drive(harvesting_id, "videos/harvesting.mp4")
+    harvesting = download_video_from_drive(harvesting_id, "harvesting.mp4")
     pest_id = "19pxHer0gmSzlaUwrC7V58b-wQRiKA3pb"  # replace with your ID
-    pest = download_video_from_drive(pest_id, "videos/pest.mp4")
+    pest = download_video_from_drive(pest_id, "pest.mp4")
 
 
     videos = {
